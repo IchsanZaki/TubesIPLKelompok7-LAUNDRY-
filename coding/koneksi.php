@@ -1,3 +1,3 @@
 <?php
-	$conn = mysqli_connect('localhost', 'root', '', 'laundryy');
+	$conn = mysqli_connect('localhost', 'root', '', 'laundryIPL');
 ?>
