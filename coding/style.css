@@ -1,4 +1,3 @@
-
 body {
     font-family: Arial, sans-serif;
     background: url('b1.jpg') center/cover no-repeat; /* Ganti 'background.jpg' dengan nama file gambar Anda */
@@ -10,30 +9,27 @@ body {
     height: 100vh;
 }
 
-
 .container {
-    background-color: rgba(236, 236, 236, 0.8);
+    background-color: rgba(236, 236, 236, 0.8); /* Menambahkan latar belakang putih semi-transparan untuk kontainer formulir */
     padding: 27px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 420px; /* Tentukan lebar form sesuai kebutuhan */
-    margin: auto; /* Agar form berada di tengah */
+    width: 420px;
 }
-
 
 label {
     display: block;
     margin-bottom: 16px;
 }
 
-input, textarea, select {
+input, textarea {
     width: 100%;
     padding: 5px;
     margin-bottom: 15px;
 }
 
 button {
-    background-color: rgb(10, 10, 8);
+    background-color: #030303;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -42,8 +38,3 @@ button {
     display: block;
     margin: auto; /* Agar tombol berada di tengah */
 }
-
-
-
-
-
