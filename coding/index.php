@@ -1,43 +1,37 @@
-<?php
-include 'layout/header.php';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Transaksi Cucian</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-$paket = select("SELECT * FROM paket");
+<div class="container">
+    <h2>Form Transaksi Cucian</h2>
+    <form action="proses_transaksi.php" method="post">
+        <label for="nama">Nama :</label>
+        <input type="text" name="nama" required>
 
-?>
-    <div class="container mt-1">
-    <h1>Data Paket</h1>
+        <label for="alamat">Alamat :</label>
+        <input type="text" name="alamat" required>
 
-    <a href="tambah.php" class="btn btn-primary mb-1">Tambah</a>
+        <label for="berat">Berat Cucian (kg) :</label>
+        <input type="number" name="berat" required>
 
-    <table class="table table-bordered table-striped mt-1">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Nama paket</th>
-            <th>Jumlah</th>
-            <th>Harga</th>
-            <th>Tanggal</th>
-            <th>Keterangan</th>
-        <tr>
-    <thead>
+        <label for="paket">Jenis Paket :</label>
+        <select name="paket" required>
+            <option value="reguler">Reguler</option>
+            <option value="express">Express</option>
+        </select>
 
-    <tbody>
-        <?php $no = 1; ?>
-        <?php foreach ($paket as $paket) : ?>
-        <tr>
-            <td><?= $no++; ?></td>
-            <td><?= $paket['nama'] ?></td>
-            <td><?= $paket['jumlah']?></td>
-            <td>Rp. <?= number_format($paket['harga'],0,',','.');?></td>
-            <td><?= date('d/m/Y H:i:s', strtotime($paket['tanggal']));?></td>
-            <td width="15%" class="text-center">
-                <a href="" class="btn btn-success">Edit</a>
-                <a href="" class="btn btn-danger">Hapus</a>
-            </td>
-        <tr>
-            <?php endforeach; ?>
-        </tbody>
-        </table>
-    </div>
+        <label for="tgl_pengambilan">Tanggal Pengambilan :</label>
+        <input type="date" name="tgl_pengambilan" required>
 
-<?php include'layout/footer.php'; ?>
+        <button type="submit">Submit</button>
+    </form>
+   
+</div>
+</body>
+</html>
