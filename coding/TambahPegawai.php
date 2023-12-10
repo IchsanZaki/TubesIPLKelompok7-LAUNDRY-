@@ -1,10 +1,14 @@
+<?php
+include 'koneksi.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Report Transaksi</title>
+    <title>Input Pegawai</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="styleside.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -39,7 +43,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="ReportTransaki.php">
+                    <a href="ReportTransaksi.php">
                         <i class="fas fa-copy"></i>
                         Report Transaksi
                     </a>
@@ -55,6 +59,7 @@
             <ul class="list-unstyled CTAs">
             </ul>
         </nav>
+
         <div id="content">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <!-- Page Content  -->
@@ -71,68 +76,42 @@
                     </div>
                 </div>
             </nav>
-            <h2>Report Transaksi</h2>
-            <?php
-            session_start();
-            include'koneksi.php';
-            include'functions.php';
-            ?>
-            <br>
-            <form method="POST" action="CetakReportTransaksi.php" target="_blank" >
-                <label>Tanggal Awal</label>
-                <input type="date" name="awal" id="stayf" value="<?php echo date('Y-m-d'); ?>" class="form-control">
-
-                <label>Tanggal Akhir</label>
-                <input type="date" name="akhir" id="stayf" value="<?php echo date('Y-m-d'); ?>" class="form-control">
-                <br>
-                <button class="btn btn-info" type="submit" name="submit" value="proses" onclick="return valid();">Cetak</button>
-            </form>
-            <table id="customers" border="1" class="table table-bordered">
-                <thead>
-                    <tr class="bg bg-info">
-                        <th>No</th>
-                        <th>ID Transaksi</th>
-                        <th>ID Customer</th>
-                        <th>nama</th>
-                        <th>Jenis Laundry</th>
-                        <th>Alamat</th>
-                        <th>Berat</th>
-                        <th>Total Harga</th>
-                        <th>Tanggal Pengambilan</th>
-                        <th>status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                        if (isset($_POST['tgl_awal'])&& isset($_POST['tgl_akhir'])) {
-                        $tgl_awal=date('Y-m-d', strtotime($_POST["tgl_awal"]));
-                        $tgl_akhir=date('Y-m-d', strtotime($_POST["tgl_akhir"]));
-                        $query=mysqli_query($conn,"SELECT *FROM tbtransaksi INNER JOIN tbcustomer ON tbcustomer.IdCustomer = tbtransaksi.IdCustomer INNER JOIN tbpaket ON tbpaket.IdPaket = tbtransaksi.IdPaket where Pengambilan between '".$tgl_awal."' and '".$tgl_akhir."' order by IdTransaksi asc");
-                        }else {
-                            $query=mysqli_query($conn,"SELECT *FROM tbtransaksi INNER JOIN tbcustomer ON tbcustomer.IdCustomer = tbtransaksi.IdCustomer INNER JOIN tbpaket ON tbpaket.IdPaket = tbtransaksi.IdPaket order by IdTransaksi asc");
-                        }
-                        $no=1;
-                        while ($data = mysqli_fetch_array($query)) {
-                        echo "
-                        <tr>
-                            <td>$no</td>
-                            <td>$data[IdTransaksi]</td>
-                            <td>$data[IdCustomer]</td>
-                            <td>$data[nama]</td>
-                            <td>$data[JenisPaket]</td>
-                            <td>$data[alamat]</td>
-                            <td>$data[berat]</td>
-                            <td>".rupiah($data['HargaTotal'])."</td>
-                            <td>$data[Pengambilan]</td>
-                            <td>$data[status]</td>
-                        </tr>
-                                ";
-                                $no++;
-                                }
-
-                    ?><br><br>
-                </tbody>
-            </table>
+            <h2>Input Pegawai</h2>
+            <form role="form" method="post" enctype="multipart/form-data" onsubmit="return validasi()" name="biodata">
+              <div class="form-group">
+                <label>ID Pegawai</label>
+                <input class="form-control" type="Text" name="IdPegawai" >
+              </div>
+              <div class="form-group">
+                <label>Nama</label>
+                <input class="form-control" type="Text" name="nama"  >
+              </div>
+              <div class="form-group">
+                <label>Alamat</label>
+                <input class="form-control" type="Text" name="alamat"  >
+              </div>
+              <div class="form-group">
+                <label>NO HP</label>
+                <input class="form-control" type="Text" name="NoHP"  >
+              </div>
+              <div class="form-group">
+                <label>NO KTP</label>
+                <input class="form-control" type="Text" name="NoKTP"  >
+              </div>
+              <div class="form-group">
+                <label>Tanggal Lahir</label>
+                <input class="form-control" type="date" name="TglLahir"  >
+              </div>
+              <div class="form-group">
+                <label>Username</label>
+                <input class="form-control" type="Text" name="username"  >
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input class="form-control" type="Text" name="password"  >
+              </div><br>
+              <input type="submit" name="cek" value="Tambah Data" class="btn btn-primary" >
+          	</form>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
@@ -144,5 +123,28 @@
             });
         });
     </script>
+    <?php
+        if (isset($_POST['cek'])) {
+            include "koneksi.php";
+            $idpegawai = $_POST['IdPegawai'];
+            $nama = $_POST['nama'];
+            $alamat = $_POST['alamat'];
+            $nohp = $_POST['NoHP'];
+            $noktp = $_POST['NoKTP'];
+            $tgllahir = $_POST['TglLahir'];
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+
+            $sql = "INSERT INTO tbpegawai VALUES('$idpegawai','$nama','$alamat','$nohp','$noktp','$tgllahir','$username','$password')";
+            $query = mysqli_query($conn, $sql);
+            if ($query) {
+                echo "<script>alert('Data Pegawai telah diinput');</script>";
+                echo "<script> location = 'TampilPegawai.php'</script>";
+            } else {
+                echo "gagal";
+            }
+  }
+        ?>
 </body>
+
 </html>

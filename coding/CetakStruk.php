@@ -30,14 +30,14 @@
 	include 'koneksi.php';
 	include 'functions.php';
 	$id = $_GET['id']; 
-	$member = mysqli_query($conn,"SELECT * FROM tbtransaksi INNER JOIN tbcustomer ON tbcustomer.IdCustomer = tbtransaksi.IdCustomer WHERE IdTransaksi like '%$id%'");;
+	$member = mysqli_query($conn,"SELECT * FROM tbtransaksi INNER JOIN tbcustomer ON tbcustomer.IdCustomer = tbtransaksi.IdCustomer INNER JOIN tbpaket ON tbpaket.IdPaket = tbtransaksi.IdPaket WHERE IdTransaksi like '%$id%'");;
 	while($row = mysqli_fetch_array($member)) {
 		$pdf -> Cell(55,6,'ID Transaksi :',0,0,'L');
 		$pdf -> Cell(20,6,$row['IdTransaksi'],0,1,'L');
 		$pdf -> Cell(55,6,'Nama Member :',0,0,'L');
 		$pdf -> Cell(20,6,$row['nama'],0,1,'L');
 		$pdf -> Cell(55,6,'Jenis Paket :',0,0,'L');
-		$pdf -> Cell(20,6,$row['JenisLaundry'],0,1,'L');
+		$pdf -> Cell(20,6,$row['JenisPaket'],0,1,'L');
 		$pdf -> Cell(55,6,'Alamat :',0,0,'L');
 		$pdf -> Cell(20,6,$row['alamat'],0,1,'L');
 		$pdf -> Cell(55,6,'Berat :',0,0,'L');

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Data Transaksi</title>
+    <title>Data Pegawai</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="styleside.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -63,33 +63,25 @@
                         <i class="fas fa-align-left"></i>
                         <span>Sidebar</span>
                     </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    </div>
                 </div>
             </nav>
-            <h2>Data Transaksi</h2>
+            <h2>Data Pegawai</h2>
             <?php
             include'koneksi.php';
             include'functions.php';
             ?>
-            <a class="btn btn-primary" href="TambahTransaksi.php" role="button">Input Transaksi</a>
+            <a class="btn btn-primary" href="TambahPegawai.php" role="button">Input Pegawai</a>
             <table id="customers" border="1" class="table table-bordered">
                 <thead>
                     <tr class="bg bg-info">
                         <th>No</th>
-                        <th>ID Transaksi</th>
-                        <th>ID Customer</th>
-                        <th>nama</th>
-                        <th>Jenis Laundry</th>
+                        <th>ID Pegawai</th>
+                        <th>Nama</th>
                         <th>Alamat</th>
-                        <th>Berat</th>
-                        <th>Total Harga</th>
-                        <th>Tanggal Pengambilan</th>
-                        <th>status</th>
+                        <th>No HP</th>
+                        <th>No KTP</th>
+                        <th>Tanggal Lahir</th>
+                        <th>Username</th>
                         <th>aksi</th>
                     </tr>
                 </thead>
@@ -97,24 +89,21 @@
                     <?php
                         $no=1;
                         $search = @$_POST['search'];
-                        $query = mysqli_query($conn,"SELECT *FROM tbtransaksi INNER JOIN tbcustomer ON tbcustomer.IdCustomer = tbtransaksi.IdCustomer INNER JOIN tbpaket ON tbpaket.IdPaket = tbtransaksi.IdPaket ");
+                        $query = mysqli_query($conn,"SELECT *FROM tbpegawai");
                         while ($data = mysqli_fetch_array($query)) {
                         echo "
                         <tr>
                             <td>$no</td>
-                            <td>$data[IdTransaksi]</td>
-                            <td>$data[IdCustomer]</td>
+                            <td>$data[IdPegawai]</td>
                             <td>$data[nama]</td>
-                            <td>$data[JenisPaket]</td>
                             <td>$data[alamat]</td>
-                            <td>$data[berat]</td>
-                            <td>".rupiah($data['HargaTotal'])."</td>
-                            <td>$data[Pengambilan]</td>
-                            <td>$data[status]</td>
+                            <td>$data[NoHP]</td>
+                            <td>$data[NoKTP]</td>
+                            <td>$data[TglLahir]</td>
+                            <td>$data[username]</td>
                             <td>
-                                <a href='EditTransaksi.php?id=$data[IdTransaksi]' >EDIT</a> |
-                                <a href='HapusTransaksi.php?IdTransaksi=$data[IdTransaksi]' onClick=\"return confirm('anda yakin?')\">HAPUS</a> |
-                                <a href='CetakStruk.php?id=$data[IdTransaksi]' >CETAK</a> 
+                                <a href='EditPegawai.php?id=$data[IdPegawai]' >EDIT</a> |
+                                <a href='HapusPegawai.php?IdPegawai=$data[IdPegawai]' onClick=\"return confirm('anda yakin?')\">HAPUS</a> 
                             </td>
                         </tr>
                                 ";

@@ -8,8 +8,8 @@ $pdf ->Cell(190,7,'E - Laundry' ,0,1,'C');
 $pdf ->SetFont('Arial','','12');
 $pdf ->Cell(190,3,'Cuci cepat dan bersih',0,1,'C');
 
-$pdf->Cell(190,7,'Jl. Pesantren No.KM.2, Cibabat, Kec. Cimahi Utara',0,1,'C');
-$pdf->Cell(190,4,'Telp/fax : (022)6645951 Email : info@poltektedc.ac.id Kota Cimahi 40513',0,1,'C');
+$pdf->Cell(190,7,'Jl. asdasdasdadadasda',0,1,'C');
+$pdf->Cell(190,4,'Telp/fax : (022)1432141 Email : Laundry@gmail.com Kota Cimahi 40512',0,1,'C');
 
 $pdf->Cell(190,3,'','B',1,'L');
 $pdf->Cell(190,1,'','B',0,'L');
@@ -36,12 +36,12 @@ $pdf -> Cell(190,7,'Data Transaksi',0,1,'J');
 	include 'functions.php';
 	$awal=$_POST['awal'];
 	$akhir=$_POST['akhir'];
-	$member = mysqli_query($conn,"SELECT * FROM tbtransaksi INNER JOIN tbcustomer ON tbcustomer.IdCustomer = tbtransaksi.IdCustomer WHERE Pengambilan BETWEEN '".$awal."' and '".$akhir."'");
-	while($row = mysqli_fetch_array($member)) {
+	$customer = mysqli_query($conn,"SELECT * FROM tbtransaksi INNER JOIN tbcustomer ON tbcustomer.IdCustomer = tbtransaksi.IdCustomer INNER JOIN tbpaket ON tbpaket.IdPaket = tbtransaksi.IdPaket WHERE Pengambilan BETWEEN '".$awal."' and '".$akhir."'");
+	while($row = mysqli_fetch_array($customer)) {
 		$pdf -> Cell(24,6,$row['IdTransaksi'],1,0,'C');
 		$pdf -> Cell(24,6,$row['IdCustomer'],1,0,'C');
         $pdf -> Cell(24,6,$row['nama'],1,0,'C');
-		$pdf -> Cell(24,6,$row['JenisLaundry'],1,0,'C');
+		$pdf -> Cell(24,6,$row['JenisPaket'],1,0,'C');
         $pdf -> Cell(24,6,$row['alamat'],1,0,'C');
         $pdf -> Cell(24,6,$row['berat'],1,0,'C');
         $pdf -> Cell(24,6,date('d-m-Y', strtotime($row["Pengambilan"])),1,0,'C');
@@ -53,7 +53,7 @@ $pdf -> Cell(190,7,'Data Transaksi',0,1,'J');
 
 	include 'koneksi.php';
 	 $a = 0;
-	 $sql = mysqli_query($conn,"SELECT * FROM tbtransaksi INNER JOIN tbcustomer ON tbcustomer.IdCustomer = tbtransaksi.IdCustomer WHERE Pengambilan BETWEEN '".$awal."' and '".$akhir."' ORDER BY IdTransaksi");
+	 $sql = mysqli_query($conn,"SELECT * FROM tbtransaksi WHERE Pengambilan BETWEEN '".$awal."' and '".$akhir."' ORDER BY IdTransaksi");
 	 while($data = mysqli_fetch_array($sql)) {
 	 	$a++;
 	 	$total[$a] = $data['HargaTotal'];
@@ -93,6 +93,4 @@ $pdf -> Cell(190,7,'Data Transaksi',0,1,'J');
 
 	//menutup dokumen
 	$pdf->Output('I',"cetak_struk.php",false);
-
-
 ?>
