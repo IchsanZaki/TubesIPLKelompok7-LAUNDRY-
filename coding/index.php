@@ -1,33 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input Edit Data</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-    <h2>Input Edit Data</h2>
-        <?php include('koneksi.php'); ?>
-        <form action="save_data.php" method="post">
-            <label for="nama">Nama:</label>
-            <input type="text" name="nama" required>
+<?php
+include 'layout/header.php';
 
-            <label for="alamat">Alamat:</label>
-            <input type="text" name="alamat" required>
+$paket = select("SELECT * FROM paket ORDER BY id_paket ASC");
 
-            <label for="telepon">Telepon:</label>
-            <input type="tel" name="telepon" required>
+?>
+    <div class="container mt-1">
+    <h1>Data Paket</h1>
 
-            <label for="username">Username:</label>
-            <input type="text" name="username" required>
+    <a href="tambah-paket.php" class="btn btn-primary mb-1">Tambah</a>
 
-            <label for="password">Password:</label>
-            <input type="password" name="password" required>
+    <table class="table table-bordered table-striped mt-1">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama paket</th>
+            <th>Jumlah</th>
+            <th>Harga</th>
+            <th>Tanggal</th>
+            <th>Keterangan</th>
+        <tr>
+    <thead>
 
-            <button type="submit">Simpan Data</button>
-        </form>
+    <tbody>
+        <?php $no = 1; ?>
+        <?php foreach ($paket as $paket) : ?>
+        <tr>
+            <td><?= $no++; ?></td>
+            <td><?= $paket['nama'] ?></td>
+            <td><?= $paket['jumlah']?></td>
+            <td>Rp. <?= number_format($paket['harga'],0,',','.');?></td>
+            <td><?= date('d/m/Y H:i:s', strtotime($paket['tanggal']));?></td>
+            <td width="15%" class="text-center">
+                <a href="edit-paket.php?id_paket=<?=$paket['id_paket']; ?>" class="btn btn-success">Edit</a>
+                <a href="hapus-paket.php?id_paket=<?=$paket['id_paket']; ?>" class="btn 
+                btn-danger" onclick="return confirm('Yakin data paket dihapus.?');">Hapus</a>
+            </td>
+        <tr>
+            <?php endforeach; ?>
+        </tbody>
+        </table>
     </div>
-</body>
-</html>
+
+<?php include'layout/footer.php'; ?>

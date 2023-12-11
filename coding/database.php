@@ -1,2 +1,2 @@
 <?php
-	$db = mysqli_connect('localhost', 'root', '', 'crudpaket');
+	$db = mysqli_connect('localhost', 'root', '','crudpaket');
