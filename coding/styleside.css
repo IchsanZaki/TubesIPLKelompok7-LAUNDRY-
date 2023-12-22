@@ -191,6 +191,13 @@ a.article:hover {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
+    background: linear-gradient(rgba(13, 141, 184, 0.89), rgba(173, 216, 230, 0.3)), url('backlaundry2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#customers {
+    background-color: #fff; /* Menetapkan warna latar belakang tabel menjadi putih */
 }
 
 
