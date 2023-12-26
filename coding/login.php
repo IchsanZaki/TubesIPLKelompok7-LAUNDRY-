@@ -4,6 +4,7 @@ $host = "localhost";
 $user = "root";
 $pass = "";
 $db = "laundryipl";
+session_start();
 
 $koneksi = new mysqli($host, $user, $pass, $db);
 
@@ -29,19 +30,35 @@ if (isset($_POST['login'])) {
     //cek apakah username dan password cocok dengan tabel pegawai
     if ($result_pegawai->num_rows > 0) {
         //buat session untuk pegawai
+        $row_tbpegawai = mysqli_fetch_array($result_pegawai);
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
+        $_SESSION["tbpegawai_IdPegawai"] = $row_tbpegawai["IdPegawai"];
+        $_SESSION["tbpegawai_nama"] = $row_tbpegawai["nama"];
+        $_SESSION["tbpegawai_alamat"] = $row_tbpegawai["alamat"];
+        $_SESSION["tbpegawai_NoHP"] = $row_tbpegawai["NoHP"];
+        $_SESSION["tbpegawai_NoKTP"] = $row_tbpegawai["NoKTP"];
+        $_SESSION["tbpegawai_TglLahir"] = $row_tbpegawai["TglLahir"];
+        $_SESSION["tbpegawai_username"] = $row_tbpegawai["username"];
+        $_SESSION["tbpegawai_password"] = $row_tbpegawai["password"];
         //redirect ke halaman pegawai
-        header("location:halaman_pegawai.php");
+        header("location:TampilTransaksi.php");
     }
 
     //cek apakah username dan password cocok dengan tabel customer
     else if ($result_customer->num_rows > 0) {
         //buat session untuk customer
+        $row_tbcustomer = mysqli_fetch_array($result_customer);
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
+        $_SESSION['tbcustomer_IdCustomer'] = $row_tbcustomer["IdCustomer"];
+        $_SESSION["tbcustomer_nama"] = $row_tbcustomer["nama"];
+        $_SESSION["tbcustomer_alamat"] = $row_tbcustomer["alamat"];
+        $_SESSION["tbcustomer_NoHP"] = $row_tbcustomer["NoHP"];
+        $_SESSION["tbcustomer_username"] = $row_tbcustomer["username"];
+        $_SESSION["tbcustomer_password"] = $row_tbcustomer["password"];
         //redirect ke halaman customer
-        header("location:halaman_customer.php");
+        header("location:TampilTransaksiCos.php");
     }
 
     //jika username dan password tidak cocok dengan tabel pegawai ataupun customer
