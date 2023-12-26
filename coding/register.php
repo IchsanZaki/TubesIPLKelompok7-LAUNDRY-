@@ -120,6 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="password" id="password" name="password" required><br>
 
         <input type="submit" value="Register">
+        
         <p style="margin-top: 10px; text-align: center; color: #555;">Sudah mempunyai akun?</p>
         <button type="button" onclick="window.location.href='login.php'">Login</button>    
     </form>
