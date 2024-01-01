@@ -47,55 +47,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Registrasi Customer</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            background: url(background2.jpg) center/cover no-repeat; /* Ganti dengan path yang sesuai */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-        }
+        margin: 0;
+        padding: 0;
+        background: url(background2.jpg) center/cover no-repeat; /* Ganti dengan path yang sesuai */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+    }
 
-        h1 {
-            text-align: center;
-            color: #fff;
-        }
+    h1 {
+        text-align: center;
+        color: #fff;
+    }
 
-        form {
-            background-color: rgba(255, 255, 255, 0.8); /* Warna latar belakang form dengan opasitas */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
+    form {
+        background-color: rgba(255, 255, 255, 0.8); /* Warna latar belakang form dengan opasitas */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-        }
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+    }
 
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-        }
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+    }
 
-        input[type="submit"] {
-            background-color: #4caf50;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    input[type="submit"],
+    button {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
+    input[type="submit"]:hover,
+    button:hover {
+        background-color: #45a049;
+    }
     </style>
 </head>
 <body>
@@ -121,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <input type="submit" value="Register">
         
-        <p style="margin-top: 10px; text-align: center; color: #555;">Sudah mempunyai akun?</p>
+        <p style="margin-top: 10px; text-align: center; color: #555;">Sudah punya akun?</p>
         <button type="button" onclick="window.location.href='login.php'">Login</button>    
     </form>
 </body>
